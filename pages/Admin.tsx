@@ -50,7 +50,7 @@ const Admin: React.FC = () => {
             <Link to="/" className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors">
               <ArrowLeft className="w-6 h-6" />
             </Link>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold">관리자 대시보드</h1>
           </div>
           <div className="px-4 py-2 bg-brand-purple/20 text-brand-purple rounded-full text-sm font-medium border border-brand-purple/30">
             관리자 모드
@@ -86,9 +86,9 @@ const Admin: React.FC = () => {
                   onChange={handleInputChange}
                   className="w-full bg-brand-black border border-white/10 rounded-lg p-3 text-white focus:border-brand-neon outline-none"
                 >
-                  <option value="Logo Design">Logo Design</option>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Branding">Branding</option>
+                  <option value="Logo Design">로고 디자인</option>
+                  <option value="Web Development">웹 개발</option>
+                  <option value="Branding">브랜딩</option>
                 </select>
               </div>
 

@@ -20,8 +20,6 @@ const Navbar: React.FC = () => {
   const scrollToSection = (id: string) => {
     setIsOpen(false);
     if (!isHome) {
-      // If not on home page, we would typically navigate to home then scroll
-      // For this SPA demo, we assume main content is on Home route
       window.location.href = `/${id}`;
     } else {
       const element = document.querySelector(id);
@@ -32,34 +30,36 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-brand-black/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-brand-black/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           <div className="flex-shrink-0 cursor-pointer" onClick={() => scrollToSection('#home')}>
             <div className="flex items-center gap-2">
-              <Rocket className="h-8 w-8 text-brand-neon" />
-              <span className="font-bold text-2xl tracking-tighter text-white">
-                DING <span className="text-brand-neon">STUDIO</span>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-neon to-brand-purple flex items-center justify-center">
+                 <Rocket className="h-4 w-4 text-white" />
+              </div>
+              <span className="font-bold text-xl tracking-widest text-white uppercase">
+                Ding<span className="text-brand-neon">.</span>
               </span>
             </div>
           </div>
           
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-center space-x-8">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-gray-300 hover:text-brand-neon transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-400 hover:text-brand-neon transition-colors px-3 py-2 text-sm font-medium tracking-wide"
                 >
                   {link.name}
                 </button>
               ))}
               <Link 
                 to="/admin" 
-                className="bg-brand-gray text-white border border-white/10 hover:border-brand-neon/50 px-4 py-2 rounded-full text-xs font-bold transition-all"
+                className="ml-4 text-xs font-bold text-gray-500 hover:text-white transition-colors uppercase tracking-widest"
               >
-                ADMIN
+                관리자
               </Link>
             </div>
           </div>
@@ -76,13 +76,13 @@ const Navbar: React.FC = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-brand-dark/95 backdrop-blur-xl border-b border-white/10">
+        <div className="md:hidden bg-brand-black border-b border-white/5">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                className="text-gray-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium w-full text-left border-b border-white/5 last:border-0"
               >
                 {link.name}
               </button>
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
              <Link 
                 to="/admin" 
                 onClick={() => setIsOpen(false)}
-                className="text-brand-neon block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                className="text-brand-neon block px-3 py-4 rounded-md text-sm font-bold w-full text-left uppercase tracking-widest"
               >
                 관리자 페이지
               </Link>

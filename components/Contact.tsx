@@ -27,7 +27,6 @@ const Contact: React.FC = () => {
       if (response.ok) {
         setStatus('success');
         setFormState({ name: '', email: '', type: '프로젝트 의뢰', message: '' });
-        // 5초 후 상태 초기화
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
@@ -48,23 +47,22 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-brand-black relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-gray/20 skew-x-12 translate-x-1/4 pointer-events-none"></div>
-      
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-brand-dark border border-white/10 rounded-2xl p-8 md:p-12 shadow-2xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Start Your Project</h2>
-            <p className="text-gray-400">
-              새로운 프로젝트를 시작할 준비가 되셨나요? <br/>
-              간단한 정보를 남겨주시면 담당자가 24시간 이내에 연락드립니다.
-            </p>
-          </div>
+    <section id="contact" className="py-32 bg-brand-dark relative overflow-hidden">
+        {/* Purple accent line */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent to-brand-purple/50"></div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">이름 / 회사명</label>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">프로젝트 문의</h2>
+          <p className="text-gray-500 font-light">
+            새로운 비즈니스의 시작, 딩 스튜디오와 함께하세요.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">성함 / 회사명</label>
                 <input
                   type="text"
                   id="name"
@@ -73,12 +71,12 @@ const Contact: React.FC = () => {
                   value={formState.name}
                   onChange={handleChange}
                   disabled={status === 'submitting'}
-                  className="w-full bg-brand-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-colors disabled:opacity-50"
-                  placeholder="홍길동"
+                  className="w-full bg-transparent border-b border-white/20 px-4 py-4 text-white placeholder-gray-700 focus:outline-none focus:border-brand-neon transition-colors rounded-none"
+                  placeholder="성함 또는 회사명"
                 />
               </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">이메일</label>
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">이메일</label>
                 <input
                   type="email"
                   id="email"
@@ -87,14 +85,14 @@ const Contact: React.FC = () => {
                   value={formState.email}
                   onChange={handleChange}
                   disabled={status === 'submitting'}
-                  className="w-full bg-brand-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-colors disabled:opacity-50"
-                  placeholder="example@company.com"
+                  className="w-full bg-transparent border-b border-white/20 px-4 py-4 text-white placeholder-gray-700 focus:outline-none focus:border-brand-neon transition-colors rounded-none"
+                  placeholder="이메일 주소"
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-300 mb-2">문의 유형</label>
+            <div className="space-y-2">
+              <label htmlFor="type" className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">문의 유형</label>
               <div className="relative">
                 <select
                   id="type"
@@ -102,7 +100,7 @@ const Contact: React.FC = () => {
                   value={formState.type}
                   onChange={handleChange}
                   disabled={status === 'submitting'}
-                  className="w-full bg-brand-black border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-colors disabled:opacity-50"
+                  className="w-full bg-brand-gray border-b border-white/20 px-4 py-4 text-white appearance-none focus:outline-none focus:border-brand-neon transition-colors rounded-none"
                 >
                   <option>프로젝트 의뢰</option>
                   <option>견적 문의</option>
@@ -114,25 +112,25 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">문의 내용</label>
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">문의 내용</label>
               <textarea
                 id="message"
                 name="message"
-                rows={5}
+                rows={4}
                 required
                 value={formState.message}
                 onChange={handleChange}
                 disabled={status === 'submitting'}
-                className="w-full bg-brand-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-colors resize-none disabled:opacity-50"
-                placeholder="프로젝트에 대해 자세히 설명해주세요."
+                className="w-full bg-transparent border-b border-white/20 px-4 py-4 text-white placeholder-gray-700 focus:outline-none focus:border-brand-neon transition-colors resize-none rounded-none"
+                placeholder="프로젝트 내용을 자유롭게 작성해주세요."
               ></textarea>
             </div>
 
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="w-full flex items-center justify-center bg-gradient-to-r from-brand-purple to-brand-neon text-white font-bold py-4 rounded-lg hover:shadow-lg hover:shadow-brand-neon/25 transition-all transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full flex items-center justify-center bg-brand-purple hover:bg-brand-neon text-white font-bold py-5 mt-4 transition-all uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === 'submitting' ? (
                 <>
@@ -141,31 +139,28 @@ const Contact: React.FC = () => {
                 </>
               ) : (
                 <>
-                  <Send className="w-5 h-5 mr-2" />
                   문의하기
+                  <Send className="w-4 h-4 ml-2" />
                 </>
               )}
             </button>
             
             {status === 'success' && (
-              <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
+              <div className="p-4 bg-green-900/20 border border-green-500/30 text-center">
                 <p className="text-green-400 font-medium">
-                  문의가 성공적으로 접수되었습니다. <br/>
-                  담당자가 확인 후 곧 연락드리겠습니다!
+                  문의가 접수되었습니다.
                 </p>
               </div>
             )}
             
             {status === 'error' && (
-              <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-center">
+              <div className="p-4 bg-red-900/20 border border-red-500/30 text-center">
                 <p className="text-red-400 font-medium">
-                  전송 중 오류가 발생했습니다. <br/>
-                  이메일(contact@dingstudio.kr)로 직접 연락 부탁드립니다.
+                  전송 실패. 이메일로 연락주세요.
                 </p>
               </div>
             )}
-          </form>
-        </div>
+        </form>
       </div>
     </section>
   );
