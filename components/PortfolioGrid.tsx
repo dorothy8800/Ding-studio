@@ -6,7 +6,6 @@ const PortfolioGrid: React.FC = () => {
   const { projects } = useAppContext();
   const [filter, setFilter] = useState<string>('All');
   
-  // Mapping for display text (Korean) vs Internal value (English)
   const categories = [
     { label: '전체', value: 'All' },
     { label: '로고 디자인', value: 'Logo Design' },
@@ -18,6 +17,12 @@ const PortfolioGrid: React.FC = () => {
     ? projects 
     : projects.filter(p => p.category === filter);
 
+  // 카테고리 영문명을 한국어로 변환하는 헬퍼 함수
+  const getCategoryLabel = (value: string) => {
+    const cat = categories.find(c => c.value === value);
+    return cat ? cat.label : value;
+  };
+
   return (
     <section id="portfolio" className="py-32 bg-brand-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +32,6 @@ const PortfolioGrid: React.FC = () => {
             <p className="text-gray-500 text-lg">딩 스튜디오의 감각이 담긴 프로젝트</p>
           </div>
 
-          {/* Minimal Filter Buttons */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
               <button
@@ -35,7 +39,7 @@ const PortfolioGrid: React.FC = () => {
                 onClick={() => setFilter(cat.value)}
                 className={`px-4 py-2 text-sm transition-all duration-300 ${
                   filter === cat.value
-                    ? 'text-brand-neon border-b border-brand-neon' 
+                    ? 'text-brand-neon border-b border-brand-neon font-bold' 
                     : 'text-gray-500 hover:text-white border-b border-transparent'
                 }`}
               >
@@ -45,27 +49,26 @@ const PortfolioGrid: React.FC = () => {
           </div>
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence>
+          <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5 }}
                 className="group relative aspect-[4/3] cursor-pointer overflow-hidden bg-brand-gray"
               >
                 <img 
                   src={project.imageUrl} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-8 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-8 backdrop-blur-[2px]">
                   <span className="text-brand-neon text-xs font-bold uppercase tracking-widest mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {project.category}
+                    {getCategoryLabel(project.category)}
                   </span>
                   <h3 className="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
                     {project.title}
